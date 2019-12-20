@@ -1,0 +1,24 @@
+{
+  "name": "tbc",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.0",
+    "http-errors": "~1.6.3",
+    "is-valid-date": "0.0.1",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.8.1",
+    "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-local-mongoose": "^5.0.1"
+  }
+}

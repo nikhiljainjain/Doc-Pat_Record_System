@@ -1,0 +1,207 @@
+<%include partials/header%>
+<style>
+/* Full-width input fields */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+input[type=text], input[type=password] ,input[type=date]{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus , input[type=date]:focus{
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal,.modal02 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+</style>
+<br> <br><br>
+<div class="container">
+    <div class="card-deck">
+        
+        
+        <div class="w-100 d-none d-sm-block d-md-none" ><!-- wrap every 2 on sm--></div>
+        <div class="card mb-4" style="border:solid 3px #28a745">
+            <img class="card-img-top img-fluid" src="//placehold.it/280x280" alt="Card image cap">
+            <div class="card-body">
+                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="card-title">Add Patient</button>
+                <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        
+        </div>
+    
+       
+            <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
+            <a href=""> <div class="card mb-4" style="border:solid 3px #28a745">
+            <img class="card-img-top img-fluid" src="//placehold.it/280x280" alt="Card image cap">
+            <div class="card-body">
+              <a href="/patient/viewpatient"> <button  style="width:auto;" class="button" type="button">View Patients</button></a>  
+                <!-- <h4 class="card-title"></h4> -->
+                <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+      
+        </div>
+    
+        
+         <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>
+       <a href=""> <div class="card mb-4" style="border:solid 3px #28a745">
+            <img class="card-img-top img-fluid" src="//placehold.it/280x280" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">View Appointments</h4>
+                <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </a>
+        </div>
+   
+        
+</div>
+<div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content" action="/patient/addpatient" method="POST">
+          <div class="container">
+            <h1>Add Patient</h1>
+            <p>Please fill the enteries.</p>
+            <hr>
+            <label for="fname"><b>First name</b></label>
+            <input type="text" placeholder="Enter First name" name="fname" required>
+      
+            <label for="lname"><b>Last name</b></label>
+            <input type="text" placeholder="Enter Last name" name="lname" required>
+
+            <label for="bday"><b>Date of Birth</b></label>
+            <input type="date" name="bday" placeholder="01/01/1990" required>
+
+            <label for="sex"><b>Sex</b></label>
+            <br>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-primary active" style="margin:0px;">
+                    <input id="male-radio" type="radio" name="sex" value="male" autocomplete="off" checked>Male
+                  </label>
+                  <label class="btn btn-primary" style="margin:0px;">
+                    <input id="female-radio" type="radio" name="sex" value="female" autocomplete="off"> Female
+                  </label>
+                </div>
+           
+      
+            <div class="clearfix">
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+              <button type="submit" class="signupbtn">Add patient</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      
+
+
+<%include partials/footer%>
