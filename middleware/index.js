@@ -7,7 +7,7 @@ middlewareObj.Owner= function(req,res,next){
         
        if(err)
        {
-           res.redirect("/users/login");
+           res.redirect("/login");
        }else{
             if(foundUser.username.equals(req.username)){
                next();
@@ -18,7 +18,7 @@ middlewareObj.Owner= function(req,res,next){
         }
         });
     }else{
-       res.redirect("/users/login");
+       res.redirect("/login");
          }
     
 };
@@ -27,6 +27,6 @@ middlewareObj.IsloggedIn=function(req,res,next){
         return next();
     }
     // req.flash("error","Please Login First!");
-    res.redirect("/users/login");
+    res.redirect("/login");
 };
 module.exports = middlewareObj;

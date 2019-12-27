@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
     <title>TBC-Arogya</title>
@@ -42,11 +43,11 @@
       </li> -->
     </ul>
     <% if(!currentUser){%>
-      <button class="btn btn-success my-2 my-sm-0" type="button" onclick="location.href='users/login'";>Login</button>
-      <button class="btn btn-outline-success mx-2 my-2 my-sm-0" type="button" onclick="location.href='users/signup'"; >Sign-up</button>
+      <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="location.href='/login'";>Login</button>
+      <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" type="button" onclick="location.href='/signup'"; >Sign-up</button>
        <% }else{%>
        <a class="nav-item active mx-3"><a  class="nav-link "><i href="https://img.icons8.com/android/24/000000/user.png"></i><%=currentUser.username%></a></a>
-       <a class="nav-item active"><a href="users/logout" class="nav-link">Logout</a></a>
+       <a class="nav-item active"><a href="/logout" class="nav-link">Logout</a></a>
        <% }%>
 
 </ul>
