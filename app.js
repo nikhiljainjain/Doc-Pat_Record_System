@@ -12,7 +12,7 @@ var passport =require('passport');
 var LocalStrategy   =     require("passport-local")
 var User= require('./models/users');
 var app = express();
-const PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
