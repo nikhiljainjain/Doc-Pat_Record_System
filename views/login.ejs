@@ -3,7 +3,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Sign-Up/Login Form</title>
+  <title>Arogya</title>
   <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <!-- <link rel="stylesheet" href="style.css"> -->
@@ -73,9 +73,7 @@ a:hover {
   color: #ffffff;
 }
 
-.tab-content > div:last-child {
-  display: none;
-}
+
 
 h1 {
   text-align: center;
@@ -184,14 +182,11 @@ textarea {
 
   <div class="form">
       
-      <ul class="top-area">
-        <li class="tab active"><a href="#doctor">Doctor</a></li>
-        <li class="tab"><a href="#patient">Patient</a></li>
-      </ul>
+      
       
       <div class="tab-content">
         <div id="doctor">   
-          <h1>Welcome Back Doc!!</h1>
+          <h1>Welcome Back !!</h1>
           
           <form action="/login" method="post">
           
@@ -220,35 +215,7 @@ textarea {
 
         </div>
         
-        <div id="patient">   
-          <h1>Welcome Back Patient!!</h1>
-          
-          <form action="/login" method="post">
-          
-
-        
-            
-         
-
-          <div class="label-field">
-            <label>
-              Username<span class="req">*</span>
-            </label>
-            <input type="text" name="username" required autocomplete="off"/>
-          </div>
-          
-          <div class="label-field">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password" name="password" required autocomplete="off"/>
-          </div>
-          
-          <button type="submit" class="button button-block"/>Get Started</button>
-          
-          </form>
-
-        </div>
+       
         
       </div>  
 </div>
@@ -285,20 +252,7 @@ $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
 });
 
-$('.tab a').on('click', function (e) {
-  
-  e.preventDefault();
-  
-  $(this).parent().addClass('active');
-  $(this).parent().siblings().removeClass('active');
-  
-  target = $(this).attr('href');
 
-  $('.tab-content > div').not(target).hide();
-  
-  $(target).fadeIn(600);
-  
-});
 </script>
 
    

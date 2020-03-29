@@ -2,298 +2,307 @@
 <link rel="stylesheet" href="/stylesheets/jquery.dataTables.min.css">
 
 <style>
-/* Full-width input fields */
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-input[type=text], input[type=password] ,input[type=date]{
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus , input[type=date]:focus{
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-button:hover {
-  opacity:1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 12px 20px;
-  background-color: transparent;
-  border: solid 2px #0074d9 ;
-  color: #0074d9;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-.signupbtn {
-  padding: 14px 20px;
-  background-color:#0074d9 ;
-  
-}
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* The Modal (background) */
-.modal,.modal02 {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: #474e5d;
-  padding-top: 50px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* Style the horizontal ruler */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
- 
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #f1f1f1;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
-  }
-}
 </style>
-<br> <br><br>
-<div class="container">
+<script type="text/javascript" src="stylesheets/morris/morris.min.js"></script>
+    <script type="text/javascript" src="stylesheets/raphael/raphael-min.js"></script>
+    
+    <script type="text/javascript" src="javascripts/chart.js"></script>
+
   
   <% if(currentUser.isDoc==true){%>
-    <div class="card-deck">
-        
-        
-        <div class="w-100 d-none d-sm-block d-md-none" ><!-- wrap every 2 on sm--></div>
-        <div class="card mb-4" style="border: solid 2px #0074d9;">
-            <img class="card-img-top img-fluid" style="height: 250px;width: 300px;margin: 35px;" src="images/pat.svg" alt="Card image cap">
-            <div class="card-body">
-                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;margin-left: 85px;" class="btn-primary">Add Patient</button>
-                <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+<div class="sidebar" id="sidebar"> <!-- sidebar -->
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">Main</li>
+                            <li class="active">
+                                    <a href="/landing"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
+                            </li>
+            
+                        <li class="">
+                            <a href="/add-patient"><i class="fa fa-user" aria-hidden="true"></i> <span> Add patient</span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        
         </div>
-    
-       
-            <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
-            <a href=""> <div class="card mb-4" style="border:2px solid #0074d9;">
-            <img class="card-img-top img-fluid" style="height: 230px;width: 280px;margin: 35px;" src="images/patient.svg" alt="Card image cap">
-            <div class="card-body">
-              <a href="/users/viewpatient"> <button  style="width:auto;margin-left: 75px;margin-top: 30px;" class="btn-primary" type="button">View Patients</button></a>  
-                <!-- <h4 class="card-title"></h4> -->
-                <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+<div class="page-wrapper"> <!-- content -->
+            <div class="content container-fluid">
+               <div class="row">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget dash-widget5">
+                            <span class="dash-widget-icon bg-primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                            <div class="dash-widget-info">
+                                <h3><%=patient.length%></h3>
+                                <span>Patients</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 text-center">
+                        <h1 style="color:#01c0c8; padding-top:35px" class="text">Welcome aboard, Dr. <%=currentUser.name%>!!</h1>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget dash-widget5">
+                            <span class="dash-widget-icon bg-info"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <div class="dash-widget-info">
+                                <h3><%=appointment.length%></h3>
+                                <span>Appointments</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+        <div class="row mt-4">
+          
+
+          <div class="col-lg-12">
+            <div class="content-page">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="page-title mb-2">
+                    View Appointments
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                      <thead>
+                        <tr>
+                          <th style="min-width:121px;">Patient_id</th>
+                          <th style="min-width:90px;">Name</th>
+                          <th style="min-width:90px;">Sex</th>
+                          <th style="min-width:70px;">DOA</th>
+                          
+                          <th style="min-width:70px;">Time</th>
+                          <th style="min-width:70px;">Disease</th>
+                          <th class="text-right"style="width:10%;">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         <% appointment.forEach(function(appointment){ %>
+                <tr>
+                  <td><%=appointment.id%></td>
+                <td><%=appointment.name%></td>
+                <td>
+                    <% if(appointment.sex===true){%>
+                        Male
+                   <% }else{%>
+                       Female
+                   <% }%>
+                </td>
+                <td><%=appointment.doa%></td>
+                <td><%=appointment.time%></td>
+                <td><%=appointment.diseases%></td>
+                <td class="text-right"><a class="btn btn-danger btn-sm mb-1" href="/users/appointment/delete/<%=appointment.id %>?_method=DELETE" method="GET"><i class="fa fa-trash-o"  aria-hidden="true"></i></a></td>
+            </tr>
+            <% } );%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
-      
+          </div>
         </div>
-    
-        
-         <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>
-       <a href=""> <div class="card mb-4" style="border:solid 2px #0074d9;">
-            <img class="card-img-top img-fluid" src="images/appointment.svg" style="height: 250px;width: 250px;margin: 35px;" alt="Card image cap">
-            <div class="card-body">
-                <!-- <h4 class="card-title">View Appointments</h4> -->
-             <a href="/users/appointment">   <button  style="width:auto;margin-left: 55px;" class="button btn-primary">View Appointment</button></a>
-
-                <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+        <div class="row mt-2">
+          <div class="col-lg-12">
+            <div class="content-page">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="page-title mb-2">
+                    All Patients
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                      <thead>
+                        <tr>
+                          <th style="min-width:50px;">Patient Id</th>
+                          <th style="min-width:74px;">FirstName</th>
+                          <th style="min-width:50px;">Lastname</th>
+                          <th style="min-width:50px;">Date of Birth</th>
+                          <th style="min-width:98px;">Sex</th>
+                          <th style="min-width:90px;">Disease</th>
+                          <th >Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% patient.forEach(function(patient){ %>
+                <tr>
+                  <td><%=patient._id%></td>
+                <td><%=patient.firstName%></td>
+                <td><%=patient.lastName%></td>
+                <td><%=patient.dateOfBirth%></td>
+                <td>
+                    <% if(patient.sex===true){%>
+                        Male
+                   <% }else{%>
+                       Female
+                   <% }%>
+                </td>
+                <td><%=patient.diseases%></td>
+                <td><a class="btn btn-danger btn-sm mb-1" href="/users/delete/<%=patient._id %>?_method=DELETE" method="POST"><i class="fa fa-trash-o"  aria-hidden="true"></i></a></td>
+            </tr>
+            <% } );%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
-        </a>
-      </div>
-   <%}else{%>
-    <div class="card-deck">
+           </div>       
+        </div>
         
-        
-      <div class="w-100 d-none d-sm-block d-md-none" ><!-- wrap every 2 on sm--></div>
-      <div class="card mb-4" style="border:solid 2px #0074d9;">
-        
-          <img class="card-img-top img-fluid" src="images/appointment.svg" style="height: 250px;width: 250px;margin: 35px;" alt="Card image cap">
-          <div class="card-body">
-              <button onclick="document.getElementById('id03').style.display='block'" style="width:auto;margin-left: 55px;" class="button btn-primary">Make Appointment</button>
-              <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
           </div>
-      
+        </div>
       </div>
-  
-     
-          <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
-          <a href=""> <div class="card mb-4" style="border:solid 2px #0074d9;">
-          <img class="card-img-top img-fluid"style="height: 250px;width: 250px;margin: 35px;" src="images/chat.svg" alt="Card image cap">
-          <div class="card-body">
-            <a href="/users/viewpatient"> <button  style="width:auto;margin-left: 85px;" class="button btn-primary" type="button">Virtual chat</button></a>  
-              <!-- <h4 class="card-title"></h4> -->
-              <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to tadditional content. This content is a little bit longer.</p> -->
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-          </div>
-    
-      </div>
-  
-      
-       <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>
-     <a href=""> <div class="card mb-4" style="border:2px solid #0074d9; ">
-          <img style="height: 250px;width: 250px;margin: 35px;"class="card-img-top img-fluid" src="images/pills.svg" alt="Card image cap">
-          <div class="card-body">
-            <a href="/users/viewpatient"> <button  style="width:auto;margin-left: 65px;" class="button btn-primary" type="button">Purchase medicin</button></a>  
-
-              <!-- <h4 class="card-title">Purchase medecine</h4> -->
-              <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-          </div>
-      </a>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+   <%}else{%>
+    <div class="sidebar" id="sidebar"> <!-- sidebar -->
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">Main</li>
+                            <li class="active">
+                                    <a href="/landing"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
+                            </li>
+            
+                        <li class="">
+                            <a href="/add-appointment"><i class="fa fa-user" aria-hidden="true"></i> <span> Book appointment</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+   <div class="page-wrapper"> <!-- content -->
+            <div class="content container-fluid">
+               <div class="row">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget dash-widget5">
+                            <span class="dash-widget-icon bg-primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                            <div class="dash-widget-info">
+                            <%if(appointment.length>0){%>
+                                <h3><%=appointment[0].doa.getDate()+"/"+parseInt(appointment[0].doa.getMonth()+1)+"/"+appointment[0].doa.getFullYear()%></h3>
+                                <span>Next Appointment</span>
+                                <%}else{%>
+                                   <h3>No appointments</h3>
+              
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 text-center">
+                        <h1 style="color:#01c0c8; padding-top:35px" class="text">Welcome aboard, <%=currentUser.name%>!!</h1>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget dash-widget5">
+                            <span class="dash-widget-icon bg-info"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <div class="dash-widget-info">
+                                <h3><%=appointment.length%></h3>
+                                <span>Appointments</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+        <div class="row mt-4">
+          
+
+          <div class="col-lg-12">
+            <div class="content-page">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="page-title mb-2">
+                    View Appointments
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                      <thead>
+                        <tr>
+                          <th style="min-width:70px;">S.no</th>
+                          <th style="min-width:90px;">Name</th>
+                          <th style="min-width:90px;">Sex</th>
+                          <th style="min-width:90px;">Doctor</th>
+                          <th style="min-width:70px;">DOA</th>
+                          
+                          <th style="min-width:70px;">Time</th>
+                          <th style="min-width:70px;">Disease</th>
+                          
+                        </tr>
+                      </thead>
+                      <% var c= 0;%>
+                      <tbody>
+                         <% appointment.forEach(function(appointment){ %>
+                         <%c=c+1%>
+                <tr>
+                  <td><%=c%></td>
+                <td><%=appointment.name%></td>
+                <td>
+                    <% if(appointment.sex===true){%>
+                        Male
+                   <% }else{%>
+                       Female
+                   <% }%>
+                </td>
+                <td><%=appointment.dname%></td>
+                <td><%=appointment.doa.getDate()+"/"+parseInt(appointment.doa.getMonth()+1)+"/"+appointment.doa.getFullYear()%></td>
+                <td><%=appointment.time%></td>
+                <td><%=appointment.diseases%></td>
+                
+            </tr>
+            <% } );%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>       
+        </div>
+        
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+   
    <%}%>
         
 </div>
-<div id="id03" class="modal">
-        <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="/users/appointment" method="POST">
-          <div class="container">
-            <h1>Make an appointment</h1>
-            <p>Please fill the enteries.</p>
-            <hr>
-            <label for="name"><b>Name</b></label>
-            <input type="text" placeholder="Enter name" name="name" required>
-            <label for="dname"><b>Doctor's Name</b></label>
-            <input type="text" placeholder="Enter Doctor's name" name="dname" required>
-
-            <label for="doa"><b>Date of Appointment</b></label>
-            <input type="date" name="doa" placeholder="01/01/1990" required>
-
-            <label for="sex"><b>Sex</b></label>
-            <br>
-                <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary active" style="margin:0px;">
-                    <input id="male-radio" type="radio" name="sex" value="male" autocomplete="off" checked>Male
-                  </label>
-                  <label class="btn btn-primary" style="margin:0px;">
-                    <input id="female-radio" type="radio" name="sex" value="female" autocomplete="off"> Female
-                  </label>
-                </div>
-                <br><br>
-                <label for="Diseases"><b>Diseases</b></label>
-                <input type="text" placeholder="eg : Asthama,fever" name="disease" required>
-      
-            <div class="clearfix">
-              <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
-              <button type="submit" class="signupbtn">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
 
       
-      <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="/users/addpatient" method="POST">
-          <div class="container">
-            <h1>Add Patient</h1>
-            <p>Please fill the enteries.</p>
-            <hr>
-            <label for="fname"><b>First name</b></label>
-            <input type="text" placeholder="Enter First name" name="fname" required>
-      
-            <label for="lname"><b>Last name</b></label>
-            <input type="text" placeholder="Enter Last name" name="lname" required>
-
-            <label for="bday"><b>Date of Birth</b></label>
-            <input type="date" name="bday" placeholder="01/01/1990" required>
-
-            <label for="sex"><b>Sex</b></label>
-            <br>
-                <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary active" style="margin:0px;">
-                    <input id="male-radio" type="radio" name="sex" value="male" autocomplete="off" checked>Male
-                  </label>
-                  <label class="btn btn-primary" style="margin:0px;">
-                    <input id="female-radio" type="radio" name="sex" value="female" autocomplete="off"> Female
-                  </label>
-                </div>
-                <br><br>
-                <label for="Diseases"><b>Diseases</b></label>
-                <input type="text" placeholder="eg : Asthama,fever" name="disease" required>
-      
-            <div class="clearfix">
-              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-              <button type="submit" class="signupbtn">Add patient</button>
-            </div>
-          </div>
-        </form>
-      </div>
+     <script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="javascripts/popper.min.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="javascripts/select2.min.js"></script>
+    <script type="text/javascript" src="javascripts/moment.min.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="stylesheets/raphael/raphael-min.js"></script>
+    <script type="text/javascript" src="javascripts/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.fullcalendar.js"></script>
+    <script type="text/javascript" src="javascripts/app.js"></script>
 
 
 <%include partials/footer%>

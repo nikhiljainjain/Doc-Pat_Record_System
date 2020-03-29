@@ -2,7 +2,6 @@ var createError = require('http-errors');
 var express = require('express');
 var bodyParser  =     require('body-parser');
 var path = require('path');
-// var _ = require('lodash');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
@@ -13,8 +12,8 @@ var passport =require('passport');
 var LocalStrategy   =     require("passport-local")
 var User= require('./models/users');
 var app = express();
+const PORT = process.env.PORT || 3000;
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use( express.static( "public" ) );
@@ -22,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb://Aadish09:QWERTY1234@ds123971.mlab.com:23971/tbc",{ useNewUrlParser: true});
 app.use(require("express-session")({
-    secret:"This is Aadish's blog",
+    secret:"This is Aadish's",
     resave:false,
     saveUninitialized:false
     
@@ -61,6 +60,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000,()=>{console.log("Server connected")})
+app.listen(PORT,()=>{console.log("Server connected")})
 
 module.exports = app;

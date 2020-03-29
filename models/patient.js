@@ -9,10 +9,7 @@ var passportLocalMongoose   =     require("passport-local-mongoose");
 var PatientSchema = mongoose.Schema({
 	username:String,
     password:String,
-	firstName: {
-		type: String,
-		required: true
-	},
+	pat_name:String,
 	lastName: {
 		type: String,
 		required: true 
@@ -28,7 +25,7 @@ var PatientSchema = mongoose.Schema({
 		required: true,
 		default: true
 	},
-	
+	dname:String,
 	// hospitalNumber: {
 	// 	type: String,
 	// 	required: true,
@@ -51,14 +48,15 @@ var PatientSchema = mongoose.Schema({
 	// lastUpdate: {
 	// 	type: Number,
 	// 	required: true
-	// }
+	// },
+	appointment:[],
 	doctor:{
         id:{
             type:mongoose.Schema.Types.ObjectId,
             ref:"User"
 		},
 		user:String,
-		H_id:Number
+		// H_id:Number
 		
     }
 });

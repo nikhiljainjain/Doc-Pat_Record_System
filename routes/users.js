@@ -6,16 +6,9 @@ const _ = require('lodash');
 
 var middleware    = require("../middleware");
 var {Patient} = require('../models/patient.js');
-// var {Disease} = require('../models/diseases.js');
 
-// var {rooms, Room} = require('./../server/models/rooms.js');
 var isValidDate = require('is-valid-date');
-// router.use(function(req,res,next){
-//     res.locals.currentUser=req.user;
-    
-//     next();
-// });
-// const {ObjectID} = require('mongodb');
+
 router.use(function(req,res,next){
     res.locals.currentUser=req.user;
     
@@ -52,13 +45,18 @@ router.post("/register-pat",function(req, res) {
     });
 });
 router.post('/appointment',middleware.IsloggedIn,(req,res)=>{
-    User.findOne({name:req.body.dname})
-    .exec(function(err,user){
+
+    
+    User.findOne({name:req.body.fname})
+    .exec(function(err,pat){
         if(err)
         {
             console.log(err);
             res.status(400).send();
         }else{
+
+                                    
+
             // console.log(user.patient);
             var sex = req.body.sex;
         if (sex === "male") {
@@ -66,23 +64,69 @@ router.post('/appointment',middleware.IsloggedIn,(req,res)=>{
         } else {
             sex = false;
         }
+        var date=req.body.doa;
+        var arr= date.split('/')
+        date =arr[1]+'/'+arr[0]+'/'+arr[2];
+        console.log(date);
             var patient = {
-                name: req.body.name,
+                name: req.body.fname,
                 id:req.user._id,
                 sex: sex,
-                doa: req.body.doa,
+                doa: new Date(date),
+                dname:req.body.dname,
+                time:req.body.time,
                 // hospitalNumber: _.toUpper(req.body.hospitalNumber),
                 diseases: req.body.disease,
                 // lastUpdate: (new Date().getTime()),
                 
             };
-            user.appointment.push(patient);
-            user.save();
+            pat.appointment.push(patient);
+             pat.appointment.sort(function(a, b) {
+    var dateA = new Date(a.doa), dateB = new Date(b.doa);
+    return dateA - dateB;
+});
+            pat.save();
+            User.findOne({name:req.body.dname}).exec(function(err,user){
+                                    if(err)
+                                    {
+                                        console.log(err);
+                                        res.status(400).send();
+                                    }else{
+                                        
+                                        // console.log(user.patient);
+                                        var sex = req.body.sex;
+                                    if (sex === "male") {
+                                        sex = true;
+                                    } else {
+                                        sex = false;
+                                    }
+                                        var patient = {
+                                            name: req.body.fname,
+                                            id:req.user._id,
+                                            sex: sex,
+                                            doa: date,
+                                            time:req.body.time,
+                                            // hospitalNumber: _.toUpper(req.body.hospitalNumber),
+                                            diseases: req.body.disease,
+                                            // lastUpdate: (new Date().getTime()),
+                                            
+                                        };
+                                        // console.log(user);
+                                        user.appointment.push(patient);
+                                       user.appointment.sort(function(a, b) {
+    var dateA = new Date(a.doa), dateB = new Date(b.doa);
+    return dateA - dateB;
+});
+                                        user.save();
 
+                                        
+                                    }
+                                });
             res.redirect("/landing");
         }
     });
 });
+
 
 router.post('/addpatient', middleware.IsloggedIn,(req, res) => {
     // receive the diseases from the form in the array PD, each element being a String with the disease name
@@ -108,7 +152,7 @@ router.post('/addpatient', middleware.IsloggedIn,(req, res) => {
     } else {
         // set the sex of the new patient
         var sex = req.body.sex;
-        if (sex === "male") {
+        if (sex === "Male") {
             sex = true;
         } else {
             sex = false;
@@ -143,7 +187,7 @@ router.post('/addpatient', middleware.IsloggedIn,(req, res) => {
     });
         patient.save().then((patient) => {
             // patient.updateScore();
-            res.status(200).redirect('/users/viewpatient');
+            res.status(200).redirect('/users/landing');
         }).catch((err) => {
             console.log(err);
             res.status(400).redirect('/users/landing');
@@ -176,17 +220,31 @@ router.get('/appointment',middleware.IsloggedIn,(req,res)=>{
             res.status(400).send();
         }else{
             // console.log(user.patient);
-            res.render("appointment",{appointment:user.appointment});
+            res.render("landing",{appointment:user.appointment});
         }
     });
-    router.get('/appointment/delete/:id',(req,res,next)=>{
+    
+    
+});
+router.get('/delete/:id',(req,res,next)=>{
+    Patient.findByIdAndRemove(req.params.id,function(err){
+        if(err)
+        {
+            res.redirect("back");
+        }else{
+            res.redirect("back");
+        }
+    });
+});
+router.get('/appointment/delete/:id',(req,res,next)=>{
         User.findById(req.user._id,function(err,user){
             
-            
             if(err)
+
             {
                 res.redirect("back");
             }else{
+                
                 for(var i=0;i<user.appointment.length;i++){
                     
                     if(user.appointment[i].id==req.params.id){
@@ -199,19 +257,6 @@ router.get('/appointment',middleware.IsloggedIn,(req,res)=>{
             }
         });
     })
-    
-});
-router.get('/delete/:id',(req,res,next)=>{
-    Patient.findByIdAndRemove(req.params.id,function(err){
-        if(err)
-        {
-            res.redirect("back");
-        }else{
-            res.redirect("back");
-        }
-    });
-})
-
 
 
 module.exports=router;
