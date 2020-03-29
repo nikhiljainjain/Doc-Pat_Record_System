@@ -1501,3 +1501,33 @@ blockquote p {font-style: italic;font-weight: 400;}
 }
 
 
+@media only screen and (max-width: 768px) {
+	.lan-img{
+		position: absolute;
+		top: 10%;
+		left:15%;
+		height: 50%;
+		width: 70%;
+		z-index:999
+	}
+	.main-cnt{
+		position: absolute;top:56%;left:; padding:40px
+	}
+	.mobile_btn{
+		display: none;
+	}
+ 
+ }
+ @media only screen and (min-width: 768px) {
+	.lan-img{
+		position: absolute;top:100px;left:300px;height:70%;width:40%;z-index:999;
+	}
+	.main-cnt{
+		position: absolute;top:200px;left:900px; border:3px solid #2D47E6;border-radius:7px;padding:40px
+	}
+ 
+ }
+ 
+
+
+ 
