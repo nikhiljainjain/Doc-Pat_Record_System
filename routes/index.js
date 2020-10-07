@@ -55,4 +55,14 @@ router.get('/add-patient', middleware.IsloggedIn,(req, res) => {
 router.get('/add-appointment', middleware.IsloggedIn,(req, res) => {
  res.render("add-app");
 });
+
+router.get("/view-persona", middleware.IsloggedIn ,(req, res) => {
+  User.findOne({_id:req.user._id}).exec((err, user)=>{
+    if(err) res.send("Error");
+    else{
+      res.send(user);
+    }
+  })
+});
+
 module.exports = router;
